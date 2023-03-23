@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+    class Battery {
+        energy = 100;
+
+        setEnergy(num) {
+            this.energy = num;
+            return this.energy;
+        }
+
+        getEnergy() {
+            return this.energy;
+        }
+
+        decreaseEnergy() {
+            if (this.energy > 0) {
+                this.energy--;
+            }
+        }
+    }
+
+    class FlashLight {
+        status = false;
+        battery = new Battery();
+
+        batteryInfo() {
+            return this.battery.getEnergy();
+        }
+
+        drainBattery(percentage) {
+            return this.battery.setEnergy(percentage)
+        }
+
+        turnOn() {
+            this.status = true;
+            this.battery.decreaseEnergy();
+            return this.status;
+        }
+
+        turnOff() {
+            this.status = false;
+            return this.status;
+        }
+
+        light() {
+            if (this.status === true && this.batteryInfo() > 0) {
+                console.log("Light is on...");
+            } else if (this.status === false) {
+                console.log("Not turned on yet");
+            } else if (this.batteryInfo() <= 0) {
+                console.log("Out of battery!");
+            }
+        }
+    }
+
+
+    let newLight = new FlashLight();
+    newLight.turnOn();
+    newLight.drainBattery(0);
+    newLight.light();
+</script>
