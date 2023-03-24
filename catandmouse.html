@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    class Mouse {
+        constructor(name, weight, speed) {
+            this.mname = name;
+            this.mweight = weight;
+            this.mspeed = speed;
+            this.alive = true;
+        }
+
+        status() {
+            if (this.alive) {
+                console.log(this.mname + ' is alive!');
+            } else {
+                console.log(this.mname + ' id dead...');
+            }
+        }
+
+        makeSound() {
+            console.log(`${this.mname} said: Chít, chít...`)
+        }
+    }
+
+    class Cat {
+        mouseHold;
+
+        constructor(name, weight, speed) {
+            this.name = name;
+            this.weight = weight;
+            this.speed = speed;
+            this.mouseHold = '';
+        }
+
+        makeSound() {
+            console.log(`${this.name} said: Meo Meo...`);
+        }
+
+        catchMouse(val) {
+            if (this.speed > val.mspeed && val.alive === true) {
+                console.log(`${val.mname} has been caught!`);
+                this.mouseHold = val;
+            } else {
+                console.log(`Can\'t catch ${val.mname}, ${this.name} speed is too low`);
+            }
+        }
+
+        eat() {
+            if (this.mouseHold !== '') {
+                this.weight += this.mouseHold.mweight;
+                let name = this.mouseHold
+                name.alive = false;
+                this.mouseHold = '';
+                console.log(`${this.name} ate ${name.mname}`);
+            } else {
+                console.log(`${this.name} don't hold any mouse to eat.`)
+            }
+        }
+    }
+
+    let Jerry = new Mouse('Jerry', 10, 90);
+    let Mickey = new Mouse('Mickey', 15, 3);
+    let MickeyVer2 = new Mouse('MickeyVer2', 115, 3);
+    let Tom = new Cat('Tom', 20, 40);
+
+    console.log(Tom, Mickey, MickeyVer2, Jerry);
+    Mickey.makeSound();
+    Jerry.makeSound();
+    Tom.makeSound();
+    Tom.catchMouse(Mickey);
+    console.log(Tom);
+    Tom.eat();
+    Mickey.status();
+    Jerry.status();
+    Tom.catchMouse(Jerry);
+    Tom.eat();
+    console.log(Tom, Mickey, MickeyVer2, Jerry);
+    MickeyVer2.makeSound();
+    Jerry.makeSound();
+    Tom.makeSound();
+    Tom.catchMouse(Jerry);
+    Tom.catchMouse(MickeyVer2);
+    Tom.eat();
+    MickeyVer2.status();
+    console.log(Tom, Mickey, MickeyVer2, Jerry);
+</script>
