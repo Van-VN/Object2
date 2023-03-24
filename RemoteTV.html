@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    class Remote {
+        remoteCode;
+        remoteTV;
+        remoteChannel;
+
+        constructor(remoteCode, remoteTV) {
+            this.remoteCode = remoteCode;
+            this.remoteTV = remoteTV;
+        }
+
+        changeChannel(val) {
+            if (this.remoteTV.status) {
+                this.remoteTV.tvChannel = val;
+            } else {
+                console.log(`Can't change channel, ${this.remoteTV.name} hasn't been turned on yet.`)
+            }
+        }
+
+        changeVolume() {
+            if (this.remoteTV.status) {
+                this.remoteTV.volume++
+            } else {
+                console.log(`Can't change channel, ${this.remoteTV.name} hasn't been turned on yet.`)
+            }
+        }
+
+        turnOn() {
+            if (!this.remoteTV.status) {
+                this.remoteTV.status = true;
+                console.log(`${this.remoteTV.name} has been turned on!`);
+            } else if (this.remoteTV.status) {
+                console.log(`${this.remoteTV.name} has already turned on...`);
+            }
+        }
+
+        turnOff() {
+            if (this.remoteTV.status) {
+                this.remoteTV.status = false;
+                console.log(`${this.remoteTV.name} has been turned off!`);
+            } else if (!this.remoteTV.status) {
+                console.log(`${this.remoteTV.name} has already turn off.`)
+            }
+        }
+
+    }
+
+    class TiVi {
+        name;
+        volume = 10;
+        tvChannel = 1;
+
+        constructor(name) {
+            this.name = name;
+            this.status = false;
+        }
+
+        getVolume() {
+            if (this.status) {
+                console.log(`Volume is ${this.volume}`);
+                return this.volume;
+            } else {
+                console.log(`Can't change volume, ${this.name} hasn't been turned on yet.`)
+            }
+        }
+
+        changeVolume() {
+            this.volume++;
+        }
+
+        changeTVChannel(val) {
+            if (this.status) {
+                this.tvChannel = val;
+            } else {
+                console.log(`Can't change channel, ${this.name} hasn't been turned on yet.`)
+            }
+        }
+
+        tvTurnOff() {
+            this.status = false;
+        }
+
+        tvTurnOn() {
+            this.status = true;
+        }
+    }
+
+    let Sony = new TiVi('Sony');
+    let sonyRemote = new Remote(1, Sony);
+
+    sonyRemote.turnOn()
+    sonyRemote.turnOn()
+    Sony.changeTVChannel(7);
+    console.log(Sony);
+    Sony.tvTurnOff();
+    console.log(Sony);
+    Sony.changeTVChannel(10);
+    sonyRemote.changeVolume();
+    sonyRemote.turnOn();
+    Sony.changeVolume();
+    sonyRemote.changeVolume();
+    sonyRemote.changeChannel(8);
+    console.log(Sony);
+    Sony.getVolume();
+</script>
