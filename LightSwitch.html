@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+    class ElectricLamp {
+        constructor() {
+            this.status = false;
+        }
+
+        turnLampOn() {
+            this.status = true;
+        }
+
+        turnLampOff() {
+            this.status = false;
+        }
+    }
+
+    let eLamp = new ElectricLamp();
+
+    class SwitchButton {
+        constructor() {
+            this.status = false;
+            this.lamp = eLamp;
+        }
+
+        turnOn() {
+            this.status = true;
+        }
+
+        turnOff() {
+            this.status = false;
+        }
+
+        checkLamp() {
+            if (this.status && this.lamp.status) {
+                console.log("Light is on!")
+            } else if (!this.status) {
+                console.log("Switch hasn't been turned on yet!")
+            } else if (this.status && !this.lamp.status) {
+                console.log("Switch is on but light is off")
+            }
+        }
+
+    }
+
+    let newSwitch = new SwitchButton();
+    newSwitch.lamp.turnLampOn();
+    console.log(newSwitch.lamp.status);
+    newSwitch.checkLamp();
+    newSwitch.turnOn();
+    newSwitch.checkLamp();
+    newSwitch.lamp.turnLampOff();
+    newSwitch.checkLamp();
+</script>
