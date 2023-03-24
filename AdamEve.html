@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    class Apple {
+        weight;
+
+        constructor() {
+            this.weight = 10;
+        }
+        eat() {
+            if (this.weight > 0) {
+                this.weight--;
+            }
+        }
+        isEmpty() {
+            if (this.weight <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        getWeight() {
+            return this.weight;
+        }
+    }
+
+    let newApple = new Apple();
+
+    class Human {
+        name;
+        gender;
+        weight;
+        apple = newApple;
+
+        constructor(name, gender, weight) {
+            this.name = name;
+            this.gender = gender;
+            this.weight = weight;
+        }
+
+        isFemale() {
+            if (this.gender === 'Female') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        setGender(val) {
+            if (val === "Female") {
+                this.gender = 'Female';
+            } else if (val === "Male") {
+                this.gender = 'Male';
+            }
+        }
+
+        eat() {
+            if (this.apple.weight > 0) {
+                this.apple.eat();
+                this.weight++;
+            } else {
+                console.log("Can't eat due to out of apple");
+            }
+        }
+
+        say(text) {
+            console.log(this.name + ' said: ' + text);
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(newName) {
+            this.name = newName;
+        }
+
+        getWeight() {
+            return (this.name + " weight is " + this.weight);
+        }
+
+        setWeight(val) {
+            this.weight = val;
+        }
+
+    }
+
+    let Adam = new Human('A', 'Male', 50);
+    Adam.setName('Adam');
+    console.log(Adam);
+    let Eve = new Human('Eve', 'Male', 50);
+    Eve.setGender('Female');
+    Eve.setWeight(40);
+    console.log(Eve);
+    console.log(Adam.isFemale());
+    Adam.say('Hello');
+    Eve.say('Hi Adam!');
+    Adam.eat();
+    console.log(Adam.apple.getWeight());
+    console.log(Eve.apple.getWeight());
+    console.log(Eve.apple.isEmpty());
+    for (let i = 0; i < 9; i++) {
+        Adam.eat();
+    }
+    console.log(Eve.apple.getWeight());
+    console.log(Adam.apple.getWeight());
+    console.log(Eve.apple.isEmpty());
+    Adam.eat();
+    console.log(Adam.getWeight());
+</script>
